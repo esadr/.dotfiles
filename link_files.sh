@@ -1,16 +1,21 @@
 #!/bin/bash
 
-LINK_FLGS=-sf
 
 # i3 config
-ln $LINK_FLGS $(readlink -f i3/config) ~/.config/i3/config
+mkdir -p ~/.config/i3
+ln -sf $(readlink -f i3/config) ~/.config/i3/config
 
 # xinit
-ln $LINK_FLGS $(readlink -f xinitrc) ~/.xinitrc
+ln -sf $(readlink -f xsettings/xinitrc) ~/.xinitrc
+ln -sf $(readlink -f xsettings/xinitrc) ~/.xsession
+mkdir -p ~/.screenlayout
+ln -sf $(readlink -f xsettings/two_monitor_vertical_and_horizontal.sh) \
+  ~/.screenlayout/two_monitor_vertical_and_horizontal.sh
+
 
 # vim
-ln $LINK_FLGS $(readlink -f vim) ~/.vim
-ln $LINK_FLGS $(readlink -f vim/vimrc) ~/.vimrc
+ln -sf $(readlink -f vim) ~/.vim
+ln -sf $(readlink -f vim/vimrc) ~/.vimrc
 
 # zsh
-ln $LINK_FLGS $(readlink -f zsh/zshrc) ~/.zshrc
+ln -sf $(readlink -f zsh/zshrc) ~/.zshrc
