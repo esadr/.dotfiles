@@ -104,7 +104,7 @@ set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
-set $ws10 "10"
+set $ws10 "*"
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -164,14 +164,10 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-bar {
-        status_command i3status
-}
 
+############### Custom Content ################################################
 
-# My custom stuff
+# Movement Hotkeys
 
 # i3 uses jkl; instead of hjkl -- fix that
 bindsym $mod+h focus left
@@ -185,6 +181,43 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# # These are more like the tmux config we will get to later, but are intuitive
+# These are more like the tmux config we will get to later, but are intuitive
 bindsym $mod+underscore split vertical
 bindsym $mod+minus      split horizontal
+
+# Application Hotkeys
+set $mode_launcher [c]hrome [j]cloud [n]autilus
+bindsym $mod+o mode "$mode_launcher"
+mode "$mode_launcher" {
+  bindsym c exec google-chrome; mode "default"
+  bindsym j exec gnome-terminal -- ssh -Y jcloud; mode "default"
+  bindsym n exec nautilus; mode "default"
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+
+# Appearance
+exec --no-startup-id ~/.xinitrc
+
+# Wallpaper
+exec --no-startup-id feh --bg-fill ~/.config/i3/wallpaper.jpg
+
+# Gaps
+set $gap_size 5
+gaps inner $gap_size
+gaps outer $gap_size
+gaps horizontal $gap_size
+gaps vertical $gap_size
+gaps top $gap_size
+gaps right $gap_size
+gaps bottom $gap_size
+gaps left $gap_size
+for_window [class="^.*"] border pixel 1
+new_window 1pixel
+smart_gaps on
+
+# Bar to top
+bar {
+  position top
+  status_command i3status
+}
