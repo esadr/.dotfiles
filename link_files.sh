@@ -11,3 +11,6 @@ ln $LINK_FLGS $(readlink -f xinitrc) ~/.xinitrc
 # vim
 ln $LINK_FLGS $(readlink -f vim) ~/.vim
 ln $LINK_FLGS $(readlink -f vim/vimrc) ~/.vimrc
+
+# zsh
+ln $LINK_FLGS $(readlink -f zsh/zshrc) ~/.zshrc

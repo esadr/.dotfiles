@@ -1,0 +1,40 @@
+## If we are sshing, start tmux session
+#if [[ -z "$TMUX" ]] && [ "$SSH_CONNECTION" != "" ]; then
+  #tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+#fi
+
+# Path to your oh-my-zsh installation.
+export ZSH="/home/jsybran/.oh-my-zsh"
+# Themes
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(host dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator)
+# Plugins
+plugins=(
+  git
+)
+# OMZSH
+source $ZSH/oh-my-zsh.sh
+
+export EDITOR="vim"
+
+# Path Changes
+export PATH=$PATH:~/.bin
+export PATH=$PATH:~/.local/bin
+
+# Personal RC files
+if [[ -f ~/.loginvmrc ]]; then
+  source ~/.loginvmrc
+fi
+
+alias palmetto="ssh -Y $PALMETTO_LOGINVM_IP"
+
+function post {
+  if [ -f $1 ]; then
+    curl -F "file=@$1" https://file.io \
+      | awk 'BEGIN{FS=","}{print $3}' \
+      | awk 'BEGIN{FS="\""}{print $4}'
+  else
+    echo "$1 is not a file!"
+  fi
+}
