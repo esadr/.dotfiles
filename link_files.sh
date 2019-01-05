@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # i3 config
 mkdir -p ~/.config/i3
 ln -sf $(readlink -f i3/config) ~/.config/i3/config
@@ -16,6 +15,7 @@ ln -sf $(readlink -f xsettings/two_monitor_vertical_and_horizontal.sh) \
 
 
 # vim
+rm -rf ~/.vim
 ln -sf $(readlink -f vim) ~/.vim
 ln -sf $(readlink -f vim/vimrc) ~/.vimrc
 
