@@ -28,3 +28,6 @@ ln -sf $(readlink -f vim/vimrc) ~/.vimrc
 
 # zsh
 ln -sf $(readlink -f zsh/zshrc) ~/.zshrc
+
+# tmux
+ln -sf $(readlink -f tmux/tmux.conf) ~/.tmux.conf.local
