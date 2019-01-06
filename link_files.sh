@@ -14,9 +14,7 @@ ln -sf $(readlink -f i3/compton.conf) ~/.config/compton.conf
 
 # xinit
 ln -sf $(readlink -f xsettings/xinitrc) ~/.xinitrc
-ln -sf $(readlink -f xsettings/xinitrc) ~/.xsession
-ln -sf $(readlink -f xsettings/xinitrc) ~/.Xresources
-ln -sf $(readlink -f xsettings/xinitrc) ~/.xprofile
+echo "exec i3" > ~/.Xsession
 
 mkdir -p ~/.screenlayout
 ln -sf $(readlink -f xsettings/two_monitor_vertical_and_horizontal.sh) \
