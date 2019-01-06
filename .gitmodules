@@ -40,3 +40,6 @@
 [submodule "i3/i3status-rust"]
 	path = i3/i3status-rust
 	url = https://github.com/greshake/i3status-rust.git
+[submodule "tmux/oh_my_tmux"]
+	path = tmux/oh_my_tmux
+	url = https://github.com/gpakosz/.tmux.git
