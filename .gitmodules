@@ -37,3 +37,6 @@
 [submodule "vim/bundle/vim-syntax-extra"]
 	path = vim/bundle/vim-syntax-extra
 	url = https://github.com/justinmk/vim-syntax-extra.git
+[submodule "i3/i3status-rust"]
+	path = i3/i3status-rust
+	url = https://github.com/greshake/i3status-rust.git
