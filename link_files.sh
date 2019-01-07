@@ -33,6 +33,9 @@ ln -sf $(readlink -f zsh/zshrc) ~/.zshrc
 ln -sf $(readlink -f tmux/oh_my_tmux/.tmux.conf) ~/.tmux.conf
 ln -sf $(readlink -f tmux/tmux.conf) ~/.tmux.conf.local
 
+# latexmk
+ln -sf $(readlink -f latexmk.conf) ~/.latexmkrc
+
 # commands
 rm -rf ~/.bin
 ln -sf $(readlink -f bin) ~/.bin
