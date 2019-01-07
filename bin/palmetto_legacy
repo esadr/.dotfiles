@@ -1,0 +1,24 @@
+#!/usr/bin/expect
+set timeout -1
+
+spawn lpass status --color=never
+expect {
+  "Not logged in." {
+    send_user -- "Make sure to login to lpass\r"
+    exit 1
+  }
+}
+
+set lpass_code 5483130390377690205
+spawn lpass show -p $lpass_code
+expect -re ".*" {
+  set passwd $expect_out(0,string)
+}
+send_user "Password: $passwd"
+
+spawn ssh -Y user.palmetto.clemson.edu
+expect -re "Password:.*"
+send $passwd\r
+expect -re "Passcode or option.*"
+send 1\r
+interact

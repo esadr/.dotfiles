@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ -z "$PALMETTO_LOGINVM_IP" ]]; then
+  echo "Palmeto LoginVM not configured."
+  exit 1
+fi
+
+# Attempt to login
+ssh -o BatchMode=yes $PALMETTO_LOGINVM_IP true
+
+if [[ $? -ne 0 ]]; then
+  echo "Connection to $PALMETTO_LOGINVM_IP failed!"
+  exit 1
+fi

@@ -1,0 +1,10 @@
+#!/bin/bash
+# If palmetto not mounted
+if [[ -z "$(ls /home/jsybran/remote/palmetto)" ]]; then
+  sshfs $PALMETTO_LOGINVM_IP:/home/jsybran/remote/jcloud \
+        /home/jsybran/remote/palmetto
+fi
+if [[ -z "$(ls /home/jsybran/remote/severn)" ]]; then
+  sshfs severn:/home/jsybran/remote/jcloud \
+        /home/jsybran/remote/severn
+fi
