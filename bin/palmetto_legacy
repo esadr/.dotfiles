@@ -10,11 +10,7 @@ expect {
 }
 
 set lpass_code 5483130390377690205
-spawn lpass show -p $lpass_code
-expect -re ".*" {
-  set passwd $expect_out(0,string)
-}
-send_user "Password: $passwd"
+set passwd [exec lpass show -p $lpass_code]
 
 spawn ssh -Y user.palmetto.clemson.edu
 expect -re "Password:.*"
