@@ -39,3 +39,6 @@ ln -sf $(readlink -f latexmk.conf) ~/.latexmkrc
 # commands
 rm -rf ~/.bin
 ln -sf $(readlink -f bin) ~/.bin
+
+# Silence SSH Login message
+touch ~/.hushlogin
