@@ -4,7 +4,8 @@ set timeout -1
 spawn lpass status --color=never
 expect {
   "Not logged in." {
-    send_user -- "Make sure to login to lpass\r"
+    spawn lpass login nalta45@gmail.com
+    interact
     exit 1
   }
 }
