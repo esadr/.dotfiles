@@ -28,6 +28,7 @@ ln -sf $(readlink -f vim/vimrc) ~/.vimrc
 
 # zsh
 ln -sf $(readlink -f zsh/zshrc) ~/.zshrc
+mkdir -p ~/.marks
 
 # tmux
 ln -sf $(readlink -f tmux/oh_my_tmux/.tmux.conf) ~/.tmux.conf
