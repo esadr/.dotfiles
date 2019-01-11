@@ -27,7 +27,15 @@ if [[ -f ~/.loginvmrc ]]; then
   source ~/.loginvmrc
 fi
 
-alias palmetto="ssh -Y $PALMETTO_LOGINVM_IP"
+function palmetto_loginvm_ip {
+  if [[ $HOST != "jcloud" ]]; then
+    scp -q jcloud:~/.loginvmrc ~
+  fi
+  source ~/.loginvmrc
+  echo $PALMETTO_LOGINVM_IP
+}
+
+alias palmetto="ssh -Y $(palmetto_loginvm_ip)"
 
 function post {
   if [ -f $1 ]; then
