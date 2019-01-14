@@ -74,3 +74,12 @@ function j {
 
 export CLEMSON_REMOTE_GATEWAY="access.computing.clemson.edu"
 alias clemssh="ssh -Y -A -t $CLEMSON_REMOTE_GATEWAY ssh -Y -A"
+
+function pnode {
+  numb=$1
+  if [[ -z "$numb" ]]; then
+    echo "Must supply node # as \$1"
+  else
+    ssh -Y -A -t $(palmetto_loginvm_ip) ssh -Y -A "node$numb"
+  fi
+}
