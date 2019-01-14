@@ -71,3 +71,6 @@ function j {
     echo "$mark not set"
   fi
 }
+
+export CLEMSON_REMOTE_GATEWAY="access.computing.clemson.edu"
+alias clemssh="ssh -Y -A -t $CLEMSON_REMOTE_GATEWAY ssh -Y -A"
