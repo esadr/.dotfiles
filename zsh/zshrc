@@ -83,3 +83,5 @@ function pnode {
     ssh -Y -A -t $(palmetto_loginvm_ip) ssh -Y -A "node$numb"
   fi
 }
+
+alias clip="xclip -selection clipboard"
