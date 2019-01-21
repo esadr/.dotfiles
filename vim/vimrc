@@ -42,11 +42,18 @@ set wildmenu
 " Crosshairs
 :set cursorcolumn
 :set cursorline
-highlight CursorLine   cterm=NONE ctermbg=235 ctermfg=NONE guibg=black guifg=NONE
-highlight CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE guibg=black guifg=NONE
+:set colorcolumn=81  "Hilight the first 'BAD' column
+highlight CursorLine   cterm=NONE ctermbg=235 ctermfg=NONE
+                     \ guibg=black guifg=NONE
+highlight CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE
+                     \ guibg=black guifg=NONE
+highlight ColorColumn ctermbg=235 guibg=black
 
-:command -complete=file -nargs=1 CppV :tabe <args>.cpp <bar> :vsplit <args>.h
-:command -complete=file -nargs=1 CppH :tabe <args>.cpp <bar> :split <args>.h <bar> :resize 20 <cr>
+:command -complete=file -nargs=1 CppV :tabe <args>.cpp <bar>
+                                    \ :vsplit <args>.h
+:command -complete=file -nargs=1 CppH :tabe <args>.cpp <bar>
+                                    \ :split <args>.h <bar>
+                                    \ :resize 20 <cr>
 :command W :w
 :command Wq :wq
 :command WQ :wq
@@ -54,3 +61,8 @@ highlight CursorColumn cterm=NONE ctermbg=235 ctermfg=NONE guibg=black guifg=NON
 " makes my spelling mistakes easier to identify using the traditional means
 hi clear SpellBad
 hi SpellBad term=undercurl cterm=undercurl ctermfg=9
+
+" Line wrap auto for text file formats
+au BufRead,BufNewFile *.md  setlocal textwidth=80
+au BufRead,BufNewFile *.tex setlocal textwidth=80
+
