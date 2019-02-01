@@ -66,3 +66,4 @@ hi SpellBad term=undercurl cterm=undercurl ctermfg=9
 au BufRead,BufNewFile *.md  setlocal textwidth=80
 au BufRead,BufNewFile *.tex setlocal textwidth=80
 
+nmap <leader>r vipgq
