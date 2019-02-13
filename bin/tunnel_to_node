@@ -1,0 +1,24 @@
+#!/bin/bash
+
+NODE_NUM=$1
+TARGET_PORT=${2:-6006}  # tensorboard port
+
+if [[ -z "$NODE_NUM" ]]; then
+  echo "Must supply node number"
+  exit
+fi
+
+function palmetto_loginvm_ip {
+if [[ $HOST != "jcloud" ]]; then
+    scp -q jcloud:~/.loginvmrc ~
+    fi
+    source ~/.loginvmrc
+    echo $PALMETTO_LOGINVM_IP
+}
+
+PALMETTO=$(palmetto_loginvm_ip)
+
+LOCAL_PORT=9999
+
+echo Connect to node$NODE_NUM:$TARGET_PORT through http://localhost:$LOCAL_PORT
+ssh -L $LOCAL_PORT:node$NODE_NUM:$TARGET_PORT -N $PALMETTO
