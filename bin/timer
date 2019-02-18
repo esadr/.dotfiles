@@ -1,0 +1,85 @@
+#!/usr/bin/ruby
+
+if (ARGV.length < 1)
+  $stderr.puts  "timer: (NUMBER[dhms])+ [ {MESSAGE}[ {TITLE}]]"
+  exit
+end
+
+seconds = 0
+title = "Timer"
+message = ""
+command = ""
+
+i = 0
+while (i < ARGV.length)
+  arg = ARGV[i]
+
+  if ((arg.downcase == '-h') || (arg.downcase == '--help'))
+    puts <<~STOP
+    timer: sleep a while, then send a notification via `notify-send`.
+
+    To specify the delay time, provide arguments in the form
+
+        [0-9]+[dhms]
+
+    Here, `d` stands for days, `h` for hours, `m` for minutes, and `s` for
+    seconds. If no unit is given, `s` will be assumed.
+
+    If you provide multiple time-delay arguments, their values will accrue.
+    So you can delay 90 seconds with `90s` or `1m 30s`.
+
+    You can also provide a message and a title to use for the notification.
+    The first argument given that does not look like a time-delay argument
+    will be used for the message. The second will be used for the title.
+    Both the message and title are optional. If neither are given, "#{title}"
+    will be used as the title, and no message will be used.
+
+    The notification will be sent via `notify-send`. If you'd like to run a
+    custom command instead, you can specify that with the `-c` flag, e.g.,
+    `-c "path/to/command"`. Information about the timer will be passed to
+    the command via standard input.
+
+    Examples:
+      timer 5m Tea
+      timer 1h 10m Laundry
+      timer 45 "Fresh is best" Pasta
+      timer 30d "Up 30 days" -c "~/bin/post_uptime_notice"
+    STOP
+    exit
+  elsif ((arg.downcase == '-c') || (arg.downcase == '--command'))
+    command = ARGV[(i + 1)]
+    i += 1
+  elsif (p = arg.match(/^([0-9]+)([dhms])?$/i))
+    if ((p[2].nil?) || (p[2].downcase == 's'))
+      seconds += p[1].to_i
+    elsif (p[2].downcase == "d")
+      seconds += ((p[1].to_i) * (60 * 60 * 24))
+    elsif(p[2].downcase == 'h')
+      seconds += ((p[1].to_i) * (60 * 60))
+    else  # 'm' is the only remaining option
+      seconds += ((p[1].to_i) * 60)
+    end
+  elsif (message.length == 0)
+    message = arg
+  else
+    title = arg
+  end
+
+  i += 1
+end
+
+if (seconds == 0)
+  seconds = 5
+end
+
+if (command == "")
+  command = "notify-send -u critical \"#{title}\" \"#{message}\""
+else
+  command = "echo \"title: #{title}\nmessage: #{message}\" | #{command}"
+end
+
+pid = fork do
+  system("sleep #{seconds} ; #{command}")
+end
+puts "[#{pid}] Set timer for #{seconds} seconds."
+
