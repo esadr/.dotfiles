@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+then
+  echo "Usage: $0 [file ...]"
+  exit 1
+fi
+
+for i in "$@"
+do
+  perl -MList::Util -e 'print List::Util::shuffle <>' $i > $i.new
+  if [ `wc -l $i | awk '{print $1}'` -eq `wc -l $i.new | awk '{print $1}'` ]
+  then
+    mv $i.new $i
+  else
+    echo "Error for file $i!"
+  fi
+done
+

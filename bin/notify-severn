@@ -1,0 +1,15 @@
+#!/bin/bash
+
+TARGET="severn"
+
+if [[ $HOST == $TARGET ]]; then
+  PREFIX=""
+else
+  PREFIX="ssh $TARGET"
+fi
+
+NOTIFIER="notify-send"
+ARGS="--urgency=critical"
+TEXT="$@"
+
+$PREFIX $NOTIFIER $ARGS $TEXT
