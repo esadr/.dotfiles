@@ -23,7 +23,7 @@ export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.local/bin
 
 function palmetto_loginvm_ip {
-  if [[ $HOST != "jcloud" ]]; then
+  if [[ "$HOST" != "jcloud" ]]; then
     ssh jcloud cat ~/.palm_ip
   fi
   cat ~/.palm_ip
@@ -81,5 +81,8 @@ function pnode {
 alias clip="xclip -selection clipboard"
 
 
-source /home/jsybran/anaconda3/etc/profile.d/conda.sh
+# source conda if needed
+if [[ -f /home/jsybran/anaconda3/etc/profile.d/conda.sh ]]; then
+  source /home/jsybran/anaconda3/etc/profile.d/conda.sh
+fi
 
