@@ -7,15 +7,14 @@ if [[ -z "$IP" ]]; then
   exit 1
 fi
 
-echo "export PALMETTO_LOGINVM_IP=$IP" > ~/.loginvmrc
-echo "export PALMETTO_TMUX_SESS=\"_always_on_palmetto\"" >> ~/.loginvmrc
-
-source ~/.loginvmrc
+echo "$IP" > ~/.palm_ip
 check-palmetto-loginvm
 
 # Start background process forever
-(tmux kill-session -t _always_on_palmetto)
-(tmux new-session -d -s "$PALMETTO_TMUX_SESS" "ssh -oStrictHostKeyChecking=no jsybran@$PALMETTO_LOGINVM_IP")
+tmux kill-session -t _always_on_palmetto
+tmux new-session -d -s \
+  "_always_on_palmetto" \
+  "ssh -oStrictHostKeyChecking=no jsybran@$IP"
 
 
 # Mount remote dir

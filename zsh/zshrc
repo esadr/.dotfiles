@@ -22,17 +22,11 @@ export EDITOR="vim"
 export PATH=$PATH:~/.bin
 export PATH=$PATH:~/.local/bin
 
-# Personal RC files
-if [[ -f ~/.loginvmrc ]]; then
-  source ~/.loginvmrc
-fi
-
 function palmetto_loginvm_ip {
   if [[ $HOST != "jcloud" ]]; then
-    scp -q jcloud:~/.loginvmrc ~
+    ssh jcloud cat ~/.palm_ip
   fi
-  source ~/.loginvmrc
-  echo $PALMETTO_LOGINVM_IP
+  cat ~/.palm_ip
 }
 
 alias palmetto="ssh -Y $(palmetto_loginvm_ip)"
