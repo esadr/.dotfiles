@@ -85,3 +85,7 @@ function pnode {
 }
 
 alias clip="xclip -selection clipboard"
+
+
+source /home/jsybran/anaconda3/etc/profile.d/conda.sh
+
