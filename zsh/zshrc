@@ -29,7 +29,7 @@ function palmetto_loginvm_ip {
   cat ~/.palm_ip
 }
 
-alias palmetto="ssh -Y $(palmetto_loginvm_ip)"
+alias palmetto="ssh -Y \$(palmetto_loginvm_ip)"
 
 function post {
   if [ -f $1 ]; then
