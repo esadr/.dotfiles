@@ -67,3 +67,9 @@ au BufRead,BufNewFile *.md  setlocal textwidth=80
 au BufRead,BufNewFile *.tex setlocal textwidth=80
 
 nmap <leader>r vipgq
+
+" disable some features for increased latex performance
+au FileType tex setlocal nocursorline
+au FileType tex setlocal nocursorcolumn
+au FileType tex :NoMatchParen
+au FileType tex setlocal colorcolumn=
