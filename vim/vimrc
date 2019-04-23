@@ -73,3 +73,6 @@ au FileType tex setlocal nocursorline
 au FileType tex setlocal nocursorcolumn
 au FileType tex :NoMatchParen
 au FileType tex setlocal colorcolumn=
+
+command DeleteDoubleSpace execute ".s/\\s\\+/ /g"
+command Flatten execute "normal! (V)\<esc> :'<,'>s:\n: :"
